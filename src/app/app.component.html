@@ -1,133 +1,41 @@
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI" Roboto, Helvetica, "Arial", sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 
-    box-sizing: border-box;
+<html lang="ru">
+<head>
+    <p>Добро пожаловать на сайт</p>
+</head>
+<body>
+    <div class="content" role="main">
 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+      <div class="card highlight-card card-big">
 
+            <li><span>Строительная компания</span></li>
 
-  .content {
- background: url(images/wall.jpg) repeat;
-    display: flex;
-    margin: 32px auto;
-    padding: 0 16px;
-    width: auto;
-    height: 650px;
-    flex-direction: column;
-    align-items: center;
-  }
+      </div>
 
+      <div class="card-container">
 
-  .card-container {
-    background: url(images/wood.jpg) repeat;
-    background-size:40%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+        <a class="card" routerLink="/main">
 
-  }
+          <span>Сделать заказ</span>
 
-  .card {
-        background:rgba(0,0,0,0.3);
-    border-radius: 4px;
-    border: 1px solid yellow;
-    height: 50px;
-    width: 200px;
-    margin: 16px 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-    color: white;
-    font-size: 25pt;
+        </a>
+        <a class="card" routerLink="/examples" >
 
-  }
+          <span>Примеры наших работ</span>
 
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
+        </a>
 
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
+        <a class="card" routerLink="/contacts" routerLinkActive="active">
 
-  .card.card-big {
-      height: 160px;
-      width: 1680px;
-  }
+          <span>Контакты</span>
 
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
+        </a>
 
-  .card-container .card:not(.highlight-card):hover {
-    transform: scale(1.1, 1.05);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-  }
+      </div>
+<router-outlet></router-outlet>
+    </div>
 
 
-  .card.highlight-card {
-      background: url(images/title.jpg) repeat;
-       background-size: cover;
-       background-position: center;
-    color: white;
-    font-weight: 6000;
-    font-size: 30pt;
-    border: none;
-    width: auto;
-    min-width: 55%;
-    position: relative;
-  }
+</body>
 
-  a,
-  a:visited,
-  a:hover {
-    color: #111111;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: yellow;
-  }
-
-</style>
-
-
-
-<div class="content" role="main">
-
-  <div class="card highlight-card card-big">
-
-        <span>Строительная компания</span>
-
-  </div>
-
-  <div class="card-container">
-
-    <a class="card" target="_blank" rel="noopener">
-
-      <span>Сделать заказ</span>
-
-    </a>
-    <a class="card" target="_blank" rel="noopener">
-
-      <span>Примеры наших работ</span>
-
-    </a>
-
-    <a class="card" target="_blank" rel="noopener">
-
-      <span>Контакты</span>
-
-    </a>
-
-  </div>
-
-</div>
+</html>
