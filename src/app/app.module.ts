@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule} from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -9,6 +12,7 @@ import { OrderComponent } from './order/order.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { MainComponent } from './main/main.component';
 
+
 const appRoutes: Routes = [
   {
     path: 'examples',
@@ -16,7 +20,7 @@ const appRoutes: Routes = [
     data: { title: 'Товары' }
   },
   {
-    path: 'order',
+    path: 'orders',
     component: OrderComponent,
     data: { title: 'Прайс' }
   },
@@ -43,7 +47,8 @@ const appRoutes: Routes = [
     ContactsComponent,
     OrderComponent,
     ExamplesComponent,
-    MainComponent
+    MainComponent,
+    MaterialsComponent
   ],
   imports: [
       RouterModule.forRoot(

@@ -1,1 +1,27 @@
 <p>order works!</p>
+<form class="emp-form" #materialForm="ngForm" (ngSubmit)="onSubmit(materialForm)">
+  <input type="hidden" name="Id" #Id="ngModel" [(ngModel)]="materialService.selectedMaterial.Id">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input class="form-control" name="Name" #Name="ngModel" [(ngModel)]="materialService.selectedMaterial.Name"
+        placeholder="Name" required>
+      <div class="validation-error" *ngIf="Name.invalid && Name.touched">This Field is Required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Description" #Description="ngModel" [(ngModel)]="materialService.selectedMaterial.Description" placeholder="Description">
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Price" #Price="ngModel" [(ngModel)]="materialService.selectedMaterial.Price" placeholder="Price">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <button [disabled]="!materialForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
+        <i class="fa fa-floppy-o"></i> Submit</button>
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(materialForm)">
+        <i class="fa fa-repeat"></i> Reset</button>
+    </div>
+  </div>
+</form>
