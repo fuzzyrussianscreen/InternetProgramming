@@ -1,46 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-
-import {Material} from'./material.model'
+import { Material } from'./material.model'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MaterialService {
     selectedMaterial : Material;
-      materialList : Material[];
-      constructor(private http : Http) { }
-
-      postMaterial(emp : Material){
-    var body = JSON.stringify(emp);
-    var headerOptions = new Headers({'Content-Type':'application/json'});
-    var requestOptions = new RequestOptions({method : RequestMethod.Post,headers : headerOptions});
-    return this.http.post('http://localhost:44328/api/Material',body,requestOptions).map(x => x.json());
+    materialList : Material[];
+    url = 'https://localhost:44328/api/Materials';
+    constructor(private http: HttpClient) { }
+    getAllMaterial(): Observable<Material[]> {
+    return this.http.get<Material[]>(this.url);
   }
-
-  putMaterial(id, emp) {
-    var body = JSON.stringify(emp);
-    var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
-    return this.http.put('http://localhost:44328/api/Material/' + id,
-      body,
-      requestOptions).map(res => res.json());
+  getMaterialById(Id: number): Observable<Material> {
+    return this.http.get<Material>(this.url + "/" + Id);
   }
-
-  getMaterialList(){
-    this.http.get('http://localhost:44328/api/Material')
-    .map((data : Response) =>{
-      return data.json() as Material[];
-    }).toPromise().then(x => {
-      this.materialList = x;
-    })
+  postMaterial(Material: Material): Observable<Material> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
+    return this.http.post<Material>(this.url, Material, httpOptions);
   }
-
-  deleteMaterial(id: number) {
-    return this.http.delete('http://localhost:44328/api/Material/' + id).map(res => res.json());
+  putMaterial(Id: number, Material: Material): Observable<Material> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
+    return this.http.put<Material>(this.url + "/" + Id, Material, httpOptions);
+  }
+  deleteMaterialById(Id: number): Observable<number> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
+    return this.http.delete<number>(this.url + "/" + Id, httpOptions);
   }
 
 }

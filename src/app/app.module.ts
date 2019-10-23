@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule} from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +11,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { OrderComponent } from './order/order.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { MainComponent } from './main/main.component';
+import { MaterialListComponent } from './order/material-list/material-list.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const appRoutes: Routes = [
@@ -48,15 +50,18 @@ const appRoutes: Routes = [
     OrderComponent,
     ExamplesComponent,
     MainComponent,
-    MaterialsComponent
+    MaterialListComponent
   ],
   imports: [
+      ToastrModule.forRoot(),
       RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
