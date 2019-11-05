@@ -4,19 +4,20 @@
     <p>Добро пожаловать на сайт</p>
 </head>
 <body>
-    <div class="content" role="main">
+    <div class="content" role="main" >
 
-      <div class="card highlight-card card-big">
+      <div class="card highlight-card card-big" >
 
-            <li><span>Строительная компания</span></li>
-
+            <p>Строительная компания </p>
       </div>
-
+      <div class="card highlight-card card-big" *ngIf="userClaims">
+      <span>Username :{{userClaims.UserName}}</span>
+      </div>
       <div class="card-container">
 
 
 
-        <a class="card" routerLink="/orders">
+        <a class="card" routerLink="/orders" >
 
           <span>Добавить материал</span>
 
@@ -33,7 +34,17 @@
 
         </a>
 
+        <a class="card" routerLink="/signup" routerLinkActive="active">
+
+          <span>Вход/Регистрация</span>
+
+        </a>
+
+        <a class="card" (click)="Logout()"  ng-show="[AuthGuard]">
+            <span>Выйти из аккаунта</span>
+        </a>
       </div>
+
       <router-outlet></router-outlet>
     </div>
 
