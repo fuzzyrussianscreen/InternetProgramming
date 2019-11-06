@@ -3,6 +3,9 @@ import { UserService } from '../shared/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'
+import { User } from '../shared/user.model';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -10,17 +13,26 @@ import { ToastrService } from 'ngx-toastr'
 })
 export class SignInComponent implements OnInit {
   isLoginError : boolean = false;
+  user: User;
   constructor(private userService : UserService,private router : Router, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.reset();
+    this.user = {
+      UserName: '',
+      Password: ''
+    }
+  }
 
-  OnSubmit(userName,password){
-     this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
+  OnSubmit(form: NgForm) {
+     this.userService.userAuthentication(form.value).subscribe((data : any)=>{
       localStorage.setItem('userToken',data.access_token);
       this.toastr.success('User login successful');
-      this.router.navigate(['/main']);
+      this.router.navigate(['/orders']);
     },
     (err : HttpErrorResponse)=>{
       this.isLoginError = true;

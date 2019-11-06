@@ -2,11 +2,11 @@
       <form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
         <div class="row">
           <div class="input-field col s6">
-            <input class="validate" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+            <input class="validate" type="text" #UserName ngModel name="UserName" placeholder="Username" required>
             <label data-error="Required field!">UserName</label>
           </div>
           <div class="input-field col s6">
-            <input class="validate" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required  minlength="3">
+            <input class="validate" type="password"  #Password ngModel name="Password"  placeholder="Password" required minlength="3">
             <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label>
           </div>
         </div>
@@ -16,9 +16,3 @@
             </div>
           </div>
       </form>
-      <div class="nav-wrapper">
-          <li>
-            <a (click)="Logout()">Logout</a>
-          </li>
-
-      </div>

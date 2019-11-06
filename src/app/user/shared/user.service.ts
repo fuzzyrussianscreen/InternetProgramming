@@ -24,11 +24,11 @@ export class UserService {
       }
 
 
-            userAuthentication(userName, password) {
-            var data = "username=" + userName + "&password=" + password + "&grant_type=password";
-            var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
-            return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
-              }
+        userAuthentication(user : User) {
+        var data = "username=" +  user.UserName + "&password=" + user.Password + "&grant_type=password";
+        var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+        return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+        }
 
     getUserClaims(){
    return  this.http.get(this.rootUrl+'/api/GetUserClaims');
