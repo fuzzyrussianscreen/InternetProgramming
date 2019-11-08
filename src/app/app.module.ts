@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,31 +28,26 @@ const appRoutes: Routes = [
     data: { title: 'Товары' }
   },
   {
-    path: 'orders',
-    component: OrderComponent,
-    data: { title: 'Прайс' },
-    canActivate:[AuthGuard]
-  },
-  {
     path: 'contacts',
     component: ContactsComponent,
     data: { title: 'Контакты' }
   },
   {
-      path: 'signup', component: UserComponent,
-      children: [{ path: '', component: SignUpComponent }]
+    path: 'signup', component: UserComponent,
+    children: [{ path: '', component: SignUpComponent }]
   },
   {
-      path: 'login', component: UserComponent,
-      children: [{ path: '', component: SignInComponent }]
+    path: 'login', component: UserComponent,
+    children: [{ path: '', component: SignInComponent }]
   },
-  { path: 'main', component: MainComponent,canActivate:[AuthGuard] },
+  { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
 
-    {
+  {
     path: '',
     component: MainComponent,
     data: { title: 'Главная' }
- }
+  },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
 ];
 
 @NgModule({
@@ -68,8 +63,8 @@ const appRoutes: Routes = [
     UserComponent
   ],
   imports: [
-      ToastrModule.forRoot(),
-      RouterModule.forRoot(
+    ToastrModule.forRoot(),
+    RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
