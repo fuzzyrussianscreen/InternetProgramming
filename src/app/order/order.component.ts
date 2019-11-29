@@ -27,7 +27,9 @@ export class OrderComponent implements OnInit {
       Id: null,
       Name: '',
       Price: null,
-      Description: ''
+      Description: '',
+      images: null,
+      images_files: null
     }
   }
 

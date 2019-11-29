@@ -1,32 +1,24 @@
-<div class="card-container">
+
 <form class="emp-form" #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
   <input type="hidden" name="Id" #Id="ngModel" [(ngModel)]="materialService.selectedMaterial.Id">
-  <div class="form-row">
-    <div class="form-group col-md-6">
+
       <input class="form-control" name="Name" #Name="ngModel" [(ngModel)]="materialService.selectedMaterial.Name"
         placeholder="Name" required>
         <span>Имя</span>
       <div class="validation-error" *ngIf="Name.invalid && Name.touched">This Field is Required.</div>
-    </div>
-  </div>
-  <div class="form-group">
+
     <input class="form-control" name="Description" #Description="ngModel" [(ngModel)]="materialService.selectedMaterial.Description" placeholder="Description">
     <span>Описание</span>
-  </div>
-  <div class="form-group">
+
     <input class="form-control" name="Price" #Price="ngModel" [(ngModel)]="materialService.selectedMaterial.Price" placeholder="Price">
     <span>Цена</span>
-  </div>
-  <div class="form-row">
       <button [disabled]="!orderForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
         <i class="fa fa-floppy-o"></i> Добавить</button>
 
       <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(orderForm)">
         <i class="fa fa-repeat"></i> Очистить</button>
-    </div>
 
   </form>
- </div>
   <div class="card">
       <app-material-list></app-material-list>
-  </div>
+</div>

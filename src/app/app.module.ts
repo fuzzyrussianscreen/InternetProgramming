@@ -18,6 +18,8 @@ import { UserService } from './user/shared/user.service';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { HttpModule } from '@angular/http';
 
 import { AuthGuard } from './auth.guard';
 
@@ -60,7 +62,8 @@ const appRoutes: Routes = [
     MaterialListComponent,
     SignUpComponent,
     SignInComponent,
-    UserComponent
+    UserComponent,
+    FileSelectDirective
   ],
   imports: [
     ToastrModule.forRoot(),
@@ -72,7 +75,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
