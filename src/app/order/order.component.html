@@ -1,7 +1,8 @@
 
 <form class="emp-form" #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
   <input type="hidden" name="Id" #Id="ngModel" [(ngModel)]="materialService.selectedMaterial.Id">
-
+  <!--
+<div class="card-container">
       <input class="form-control" name="Name" #Name="ngModel" [(ngModel)]="materialService.selectedMaterial.Name"
         placeholder="Name" required>
         <span>Имя</span>
@@ -17,7 +18,8 @@
 
       <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(orderForm)">
         <i class="fa fa-repeat"></i> Очистить</button>
-
+</div>
+-->
   </form>
   <div class="card">
       <app-material-list></app-material-list>

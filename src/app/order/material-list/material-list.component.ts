@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialService } from '../shared/material.service';
 import { Material } from '../shared/material.model';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-material-list',
@@ -10,23 +13,33 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MaterialListComponent implements OnInit {
 
-  constructor(private materialService: MaterialService, private toastr: ToastrService) { }
+  constructor(private materialService: MaterialService, private toastr: ToastrService) {
+    /*this.observable.pipe(debounceTime(1000))
+      .subscribe(val => {
+        this.materialService.getResult(val).subscribe(result => {
+          console.log("res ", result.list);
+          this.mats = result.list;
+        });
+    })*/
+  }
+  observable = new Subject<string>()
+  text: string;
   mats: Material[];
 
   ngOnInit() {
     this.materialService.getAllMaterial().subscribe(x => {
       this.mats = x;
 
-      for (let mat of x) {
-        for (let image of mat.images) {
-          this.materialService.getImage(image.original).subscribe(res => {
-            if (res.link) {
-              image.original = res.link;
-            }
-          });
-        }
-      }
     })
+  }
+
+  getResult(text:string){
+      if(text == "") this.materialService.getAllMaterial().subscribe(x => this.mats=x);
+      else this.materialService.getResult(text).subscribe(x => this.mats = x);
+  }
+
+  change(value: string) {
+    this.observable.next(value);
   }
 
   showForEdit(emp: Material) {

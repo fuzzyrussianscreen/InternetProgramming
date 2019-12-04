@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Http, RequestOptions, Headers, Response, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
@@ -13,7 +13,8 @@ import { HttpClient } from '@angular/common/http';
 export class ExamplesComponent implements OnInit {
   downloadFiles: Object;
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getAllFiles();
   }
 
   errorMessage: string;
@@ -72,7 +73,7 @@ export class ExamplesComponent implements OnInit {
         formData.append('uploadedFiles', this.filesToUpload[i], this.filesToUpload[i].name);
       }
 
-      let apiUrl = "http://localhost:5809/api/Upload";
+      let apiUrl = "https://localhost:44328/api/Upload";
       this.http.post(apiUrl, formData)
         .subscribe
         (
@@ -97,7 +98,7 @@ export class ExamplesComponent implements OnInit {
   }
 
   downloadFile(filename: string) {
-    this._http.get(this.myAppUrl + "api/DownLoadFile/" + filename,
+    this._http.get(this.myAppUrl + "api/DownloadFile?fileName=" + filename,
       {
         responseType: 'blob'
       })
@@ -115,7 +116,7 @@ export class ExamplesComponent implements OnInit {
   }
 
   getAllFiles() {
-    this._http.get("http://localhost:5809/api/Download/GetFiles").subscribe(res => {
+    this._http.get("https://localhost:44328/api/Download/GetFiles").subscribe(res => {
       console.log(res);
       this.downloadFiles = res;
     },

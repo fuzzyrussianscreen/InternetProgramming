@@ -7,21 +7,25 @@
       <th>Description</th>
       <th>Upd/Del</th>
     </tr>
+    <div id="form" style="color: white">
+      <input style="color: white" type="text" id="text" placeholder="search" [(ngModel)]="text" (ngModelChange)="getResult(text)">
+    </div>
     <tr *ngFor="let material of mats">
       <td>{{material.Id}}</td>
       <td>{{material.Name}} - {{material.Price}}</td>
       <td>{{material.Description}}</td>
       <td>
+          <!--
         <div class="form-group">
           <label for="file">Choose File</label>
           <input type="file" id="file" (change)="handleFileInput($event.target.files)">
         </div>
-
+-->
         <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="showForEdit(material)">
           <i class="fa fa-repeat"></i>Редактировать</button>
         <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="onDelete(material.Id)">
           <i class="fa fa-repeat"></i>Удалить</button>
-           
+
       </td>
     </tr>
   </tbody>

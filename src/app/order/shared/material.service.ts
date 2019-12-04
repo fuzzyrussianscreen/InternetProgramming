@@ -38,9 +38,18 @@ export class MaterialService {
     })
   };
 
+  getResult(text: string): Observable<any> {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const data: any = {
+      "text": text
+    };
+    return this.http
+      .post('https://localhost:44328/api/SearchMaterials/?text=' + text, <JSON>data, httpOptions)
+
+  }
 
   addImages(Material: Material, Id: string, mode: string): Observable<any> {
-      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const formData: FormData = new FormData();
     const room_id = new Blob([JSON.stringify(Id)], {
       type: 'application/json'
