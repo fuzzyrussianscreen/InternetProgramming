@@ -15,10 +15,7 @@ export class AppComponent {
   constructor(private router: Router, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.userService.getUserClaims().subscribe((data: any) => {
-      this.userClaims = data;
-
-    });
+    
   }
 
   Logout() {

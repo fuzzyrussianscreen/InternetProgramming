@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { WebsocketService } from '../websocket/websocket.service';
 
 @Component({
   selector: 'app-material-list',
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class MaterialListComponent implements OnInit {
 
-  constructor(private materialService: MaterialService, private toastr: ToastrService) {
+  constructor(private materialService: MaterialService, private toastr: ToastrService, private webSocketService: WebsocketService) {
     /*this.observable.pipe(debounceTime(1000))
       .subscribe(val => {
         this.materialService.getResult(val).subscribe(result => {
@@ -27,10 +28,23 @@ export class MaterialListComponent implements OnInit {
   mats: Material[];
 
   ngOnInit() {
+      /*
     this.materialService.getAllMaterial().subscribe(x => {
       this.mats = x;
 
     })
+*/
+var te = new TextEncoder();
+//this.webSocketService.webSocketContext.send(te.encode('111'));
+/*
+    this.webSocketService.webSocketContext.onmessage = (result: any) => {
+      if (result && result.data) {
+        console.log(result.data);
+        this.toastr.success(result.data);
+        //this.mats = JSON.parse(result.data);
+      }
+    }
+    */
   }
 
   getResult(text:string){

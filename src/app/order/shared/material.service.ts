@@ -11,7 +11,11 @@ export class MaterialService {
   selectedMaterial: Material;
   materialList: Material[];
   url = 'https://localhost:44328/api/Materials';
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient) {
+
+  }
   getAllMaterial(): Observable<Material[]> {
     return this.http.get<Material[]>(this.url);
   }
@@ -20,6 +24,7 @@ export class MaterialService {
   }
   postMaterial(Material: Material): Observable<Material> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
     return this.http.post<Material>(this.url, Material, httpOptions);
   }
   putMaterial(Id: number, Material: Material): Observable<Material> {
@@ -30,16 +35,22 @@ export class MaterialService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<number>(this.url + "/" + Id, httpOptions);
   }
+  /*
+  //socket = new WebSocket("ws://localhost:44328/InternetProgramming/Handler1.ashx");
+  // Соединение открыто
+  socket.addEventListener('open', function(event) {
+    socket.send('Hello Server!');
+  });
 
-  dropbox = {
-    headers: new HttpHeaders({
-      'Authorization': 'Bearer WCgqYwN1F-AAAAAAAAAAFUKF3K-QsioBlAgR8_z9moxLkOjWbpD6RR9volG_7zXf',
-      'Content-Type': 'application/json'
-    })
-  };
+  // Наблюдает за сообщениями
+  socket.addEventListener('message', function(event) {
+    console.log('Message from server ', event.data);
+  });
+*/
+
 
   getResult(text: string): Observable<any> {
-      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const data: any = {
       "text": text
     };
@@ -48,28 +59,5 @@ export class MaterialService {
 
   }
 
-  addImages(Material: Material, Id: string, mode: string): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    const formData: FormData = new FormData();
-    const room_id = new Blob([JSON.stringify(Id)], {
-      type: 'application/json'
-    });
-    const img_mode = new Blob([JSON.stringify(mode)], {
-      type: 'application/json'
-    });
-    formData.append(Id, room_id);
-    formData.append(mode, img_mode);
-    for (var i = 0; i < Material.images_files.length; i++) {
-      formData.append('images_files_' + i, Material.images_files[i]);
-    }
-    return this.http.post('https://localhost:44328/api/upload_to_dropbox', formData, httpOptions);
-  }
 
-  getImage(path: string): Observable<any> {
-    const data: any = {
-      "path": path
-    };
-
-    return this.http.post('https://api.dropboxapi.com/2/files/get_temporary_link', <JSON>data, this.dropbox);
-  }
 }
