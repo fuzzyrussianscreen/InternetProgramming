@@ -2,7 +2,7 @@
 <form class="emp-form" #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
   <input type="hidden" name="Id" #Id="ngModel" [(ngModel)]="materialService.selectedMaterial.Id">
 
-<div class="card-container">
+<div class="card">
       <input class="form-control" name="Name" #Name="ngModel" [(ngModel)]="materialService.selectedMaterial.Name"
         placeholder="Name" required>
         <span>Имя</span>
@@ -13,7 +13,7 @@
 
     <input class="form-control" name="Price" #Price="ngModel" [(ngModel)]="materialService.selectedMaterial.Price" placeholder="Price">
     <span>Цена</span>
-      <button [disabled]="!orderForm.valid" type="submit" class="btn btn-lg btn-block btn-info" (click)="SendMessage()">
+      <button [disabled]="!orderForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
         <i class="fa fa-floppy-o"></i> Добавить</button>
 
       <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(orderForm)">
